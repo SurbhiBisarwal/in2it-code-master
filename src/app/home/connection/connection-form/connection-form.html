@@ -1,0 +1,30 @@
+<div class="overlay">
+    <div class="popup">
+        <div>
+            <img src="close.svg" alt="close" (click)="close()" />
+        </div>
+
+        <form [formGroup]="connectionForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" formControlName="name" />
+
+                <label for="department">Department</label>
+                <input type="text" id="department" formControlName="department" />
+
+                <label for="position">Position</label>
+                <input type="text" id="position" formControlName="position" />
+
+                <label for="age">Age</label>
+                <input type="number" id="age" formControlName="age" />
+
+                <label for="salary">Salary</label>
+                <input type="number" id="salary" formControlName="salary" />
+
+                <label for="email">Email</label>
+                <input type="email" id="email" formControlName="email" />
+            </div>
+            <button type="submit" [disabled]="connectionForm.invalid">Submit</button>
+        </form>
+    </div>
+</div>

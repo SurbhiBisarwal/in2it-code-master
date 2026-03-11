@@ -1,0 +1,191 @@
+<div style="padding-left: 10px">
+  <h3>Data Table</h3>
+  <button>
+    <a target="_blank" href="https://cats-data-grid.netlify.app/">Data table</a>
+  </button>
+  <!-- input component -->
+  <h4>Input Component</h4>
+
+  <div style="display: flex; align-items: center; justify-content: space-evenly">
+    <cats-ui-single-select
+      [optionList]="typelist"
+      [singleSelectConfig]="singleConfig"
+      (onSelection)="onInputSelection($event)"
+    >
+    </cats-ui-single-select>
+    <cats-ui-input [inputConfig]="inputConfig" [(ngModel)]="name" required> </cats-ui-input>
+  </div>
+
+  <h4>Input Disabled</h4>
+  <cats-ui-input [disabled]="true" [inputConfig]="inputConfig" [(ngModel)]="name" required>
+  </cats-ui-input>
+  <!-- Single Select -->
+  <h4>Single Select Component</h4>
+
+  <cats-ui-single-select
+    [optionList]="option"
+    [singleSelectConfig]="singleConfig"
+    (onSelection)="onSelection($event)"
+  >
+  </cats-ui-single-select>
+
+  <!-- Multi Select -->
+  <h4>Multi Select Component</h4>
+
+  <div [formGroup]="form">
+    <cats-ui-multi-select
+      formControlName="multiselect"
+      [optionList]="option"
+      [multiSelectConfig]="multiSelectConfig"
+      (onSelection)="onSelection($event)"
+    ></cats-ui-multi-select>
+
+    <!--  Auto Complete Multi Select -->
+    <h4>Auto Complete Multi Select Component</h4>
+
+    <cats-ui-input-multi-select
+      [optionsList]="option"
+      (onItemSelection)="onSelection($event)"
+      [autoCompleteMultiSelectConfig]="autoMultiSelectConfig"
+    ></cats-ui-input-multi-select>
+  </div>
+
+  <!-- Auto Complete  single Select -->
+  <h4>Auto Complete Single Select Component</h4>
+
+  <cats-ui-input-single-select
+    [optionsList]="option"
+    [autoSingleSelectConfig]="autoSingleSelectConfig"
+    (onItemSelection)="onSelection($event)"
+  ></cats-ui-input-single-select>
+
+  <!-- Search box  -->
+  <h4>Search box Component</h4>
+
+  <cats-ui-search-box
+    (searchParamValue)="searchParamValue($event)"
+    [searchConfig]="searchConfig"
+  ></cats-ui-search-box>
+
+  <!-- Accordion Component -->
+  <h4>Accordion Component</h4>
+
+  <cats-ui-accordion>
+    <cats-ui-accordion-item title="Panel 1" [index]="0">
+      <ng-template>
+        <p>This is the content for Panel 1.</p>
+      </ng-template>
+    </cats-ui-accordion-item>
+    <cats-ui-accordion-item title="Panel 2" [index]="1">
+      <ng-template>
+        <p>This is the content for Panel 2.</p>
+      </ng-template>
+    </cats-ui-accordion-item>
+    <cats-ui-accordion-item title="Panel 3" [index]="3">
+      <ng-template>
+        <p>Tt for Panel 22313.</p>
+      </ng-template>
+    </cats-ui-accordion-item>
+  </cats-ui-accordion>
+
+  <!-- Hover Directive -->
+  <h4>Hover Directive</h4>
+  <button catsUiTooltip="Hello hover">Hover</button>
+
+  <!-- Date time-range Component -->
+  <h4>Date Time Range Component</h4>
+
+  <!-- <cats-ui-date-time-picker
+  (dateTimeSelected)="onDatetimeSelected($event)"
+  [dateConfig]="dateTimeRangeConfig"
+  [preSelectedValue]="selectDate"
+  [maxDate]="maxDate"
+></cats-ui-date-time-picker> -->
+  <button (click)="openDate()">Open Date</button>
+  <cats-ui-date-time-picker
+    #picker
+    (dateTimeSelected)="onDatetimeSelected($event)"
+    [dateConfig]="dateTimeRangeConfig"
+    [preSelectedValue]="selectDate"
+    [maxDate]="maxDate"
+  ></cats-ui-date-time-picker>
+
+  <!-- Date time Component -->
+  <h4>Date Component</h4>
+
+  <cats-ui-date-time-picker
+    (dateTimeSelected)="onDatetimeSelected($event)"
+    [dateConfig]="dateConfig"
+    [preSelectedValue]="selectDate"
+  ></cats-ui-date-time-picker>
+  <!-- [maxDate]="maxDate" -->
+
+  <!-- Radio Component -->
+  <h4>Radio Component</h4>
+
+  <cats-ui-radio-button
+    [config]="radioConfig"
+    [optionList]="option"
+    (selectionChange)="onradio($event)"
+  ></cats-ui-radio-button>
+
+  <!-- Checkbox Component -->
+  <h4>Checkbox Component</h4>
+
+  <cats-ui-checkbox-button
+    [checkBoxConfig]="checkBoxConfig"
+    (onCheckBoxSelection)="checkBox($event)"
+    [optionList]="taskOptions"
+  ></cats-ui-checkbox-button>
+
+  <!-- Toggle Component -->
+  <h4>Toggle Component</h4>
+
+  <cats-ui-toogle-button
+    [toggleConfig]="toggleConfig"
+    (onToggled)="onToggled($event)"
+  ></cats-ui-toogle-button>
+
+  <!-- Tab Component -->
+  <h4>Tab Component</h4>
+
+  <cats-ui-tab [activeTab]="0" (selectTab)="onTabSelected($event)">
+    <cats-ui-tab-item>
+      <ng-template tabHeading> Home </ng-template>
+
+      <ng-template tabContent>
+        Home content
+        <span>close</span>
+      </ng-template>
+    </cats-ui-tab-item>
+
+    <cats-ui-tab-item>
+      <ng-template tabHeading> Profile </ng-template>
+
+      <ng-template tabContent> Profile content </ng-template>
+    </cats-ui-tab-item>
+  </cats-ui-tab>
+
+  <cats-ui-tab
+    [activeTab]="activeTabIndex"
+    (selectTab)="onTabSelected($event)"
+    [disabledTabs]="disabledTabs"
+  >
+    @for (tab of tabs; track $index) {
+      <cats-ui-tab-item>
+        <ng-template tabHeading>
+          {{ tab.heading }}
+          @if (tabs.length >= 1) {
+            <span class="btn-close ms-3 fw-light" (click)="closeTab($index)">x</span>
+          }
+        </ng-template>
+
+        <ng-template tabContent>
+          {{ tab.content }}
+        </ng-template>
+      </cats-ui-tab-item>
+    }
+  </cats-ui-tab>
+</div>
+
+<router-outlet />

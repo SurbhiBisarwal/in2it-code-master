@@ -1,0 +1,64 @@
+<div style="background-color: #e4e3e1">
+  <div style="background-color: black; color: white">
+    <header class="alignDiv">
+      <div>
+        <ul class="alignDiv">
+          <li><img src="app.svg" alt="app" /></li>
+          <li>in2IT</li>
+          <li>I serve</li>
+        </ul>
+      </div>
+      <div>
+        <ul class="alignDiv">
+          <li>
+            <cats-ui-search-box
+              (searchParamValue)="searchParamValue($event)"
+              [searchConfig]="searchConfig()"
+            ></cats-ui-search-box>
+          </li>
+          <li><img src="notification.svg" alt="" /></li>
+          <li><img src="profile.svg" alt="" /></li>
+        </ul>
+      </div>
+    </header>
+  </div>
+  <div style="padding: 20px; display: flex; gap: 10%">
+    <div><img src="menuOpen.svg" style="background-color: black" /></div>
+
+    <div>control Panel</div>
+  </div>
+
+  <div style="display: flex; gap: 5%">
+    <div style="width: 15%">
+      <nav class="sidebar">
+        <ul class="nav-list">
+          <!-- DATA STUDIO -->
+          <li class="nav-section">DATA STUDIO</li>
+          <li class="nav-item" routerLink="/adapter" routerLinkActive="active">Adapters</li>
+          <li class="nav-item" routerLink="/connection" routerLinkActive="active">
+            Input Connections
+          </li>
+          <li class="nav-item">Lake</li>
+          <li class="nav-item">Pipelines</li>
+          <li class="nav-item">Event Classification</li>
+          <li class="nav-item" routerLink="/alert" routerLinkActive="active">Alert</li>
+          <li class="nav-item">Warehouse</li>
+          <li class="nav-item">Output Destinations</li>
+
+          <!-- PROCESS CONFIG -->
+          <li class="nav-section">PROCESS CONFIG</li>
+          <li class="nav-item">Integration Apps</li>
+          <li class="nav-item">Smart Rules</li>
+          <li class="nav-item">Teams</li>
+
+          <!-- MASTER CONTROL -->
+          <li class="nav-section">MASTER CONTROL</li>
+          <li class="nav-item">Domains</li>
+        </ul>
+      </nav>
+    </div>
+    <div style="height: 87vh; padding: 30px 0; width: 85%; margin-right: 20px">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,12 @@
+@if(employee){<div >
+    <div>Id : {{employee?.id}}</div>
+    <div>Name : {{employee?.name}}</div>
+    <div>Age : {{employee?.age}}</div>
+    <div>Salary : {{employee?.salary}}</div>
+    <div>Position : {{employee?.position}}</div>
+    <div>Email : {{employee?.email}}</div>
+</div>
+}
+<div style=" display: flex;">
+    <button (click)="onUpdate()">Update</button>
+</div>

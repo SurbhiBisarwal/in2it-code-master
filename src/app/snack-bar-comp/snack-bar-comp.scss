@@ -1,0 +1,56 @@
+
+
+.snackbar-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.snackbar {
+  min-width: 250px;
+  padding: 14px 18px;
+  border-radius: 6px;
+  color: white;
+  // display: flex;
+  // justify-content: space-between;
+  align-items: center;
+  // animation: slideIn 0.3s ease;
+}
+
+.snackbar .message {
+  display: flex;
+  flex-direction: column;
+}
+
+.snackbar .time {
+  font-size: 0.75rem;
+  opacity: 0.8;
+  margin-top: 2px;
+}
+.success { background: #2ecc71; }
+.error { background: #e74c3c; }
+.warning { background: #f39c12; }
+.notification { background: #3498db; }
+.processing { background: #9b59b6; }
+.delete { background: #c0392b; }
+.generic { background: #34495e; }
+.save { background: #27ae60; }
+
+.actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.actions button {
+  border: none;
+  background: transparent;
+  color:black;
+  cursor: pointer;
+  font-weight: bold;
+ 
+}

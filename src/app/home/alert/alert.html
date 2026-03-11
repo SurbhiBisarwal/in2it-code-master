@@ -1,0 +1,10 @@
+<div>
+  <img src="addBox.svg" alt="add" style="background-color: black" (click)="onclick()" />
+  <cats-data-grid
+    [rowData]="rowsData"
+    [colDefs]="colData"
+    checkboxSelectionType="multiple"
+    [checkBoxSelection]="true"
+  ></cats-data-grid>
+  <router-outlet></router-outlet>
+</div>

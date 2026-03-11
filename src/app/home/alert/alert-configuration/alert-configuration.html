@@ -1,0 +1,115 @@
+<!-- @if (isOpen) { -->
+<div class="overlay">
+  <div class="popup">
+    <div>
+      <img src="close.svg" alt="close" (click)="close()" />
+    </div>
+    <div>
+      <h5>Create Alert Definition</h5>
+      <small>Step 3: Alert configration</small>
+    </div>
+
+    <form [formGroup]="alertForm">
+      <div style="display: flex; justify-content: space-between">
+        <div style="width: 48%">
+          <label>Alert Name</label>
+          <cats-ui-input [inputConfig]="inputConfig" formControlName="alertName"> </cats-ui-input>
+          <label>Category</label>
+          <cats-ui-multi-select
+            formControlName="multiselect"
+            [optionList]="categoryOptions"
+            [multiSelectConfig]="multiSelectConfig"
+            (onSelection)="onSelection($event)"
+            formControlName="category"
+          ></cats-ui-multi-select>
+          <label>Low Level Category</label>
+          <cats-ui-multi-select
+            formControlName="multiselect"
+            [optionList]="lowLevelCategoryOptions"
+            [multiSelectConfig]="multiSelectConfig"
+            (onSelection)="onSelection($event)"
+            formControlName="lowLevelCategory"
+          ></cats-ui-multi-select>
+          <label>Group By</label>
+          <cats-ui-single-select
+            [optionList]="groupByOptions"
+            [singleSelectConfig]="singleConfig"
+            (onSelection)="onSelection($event)"
+            formControlName="groupBy"
+          >
+          </cats-ui-single-select>
+          <label>Mitre Attack</label>
+          <cats-ui-single-select
+            [optionList]="mitreAttackOptions"
+            [singleSelectConfig]="singleConfig"
+            (onSelection)="onSelection($event)"
+            formControlName="mitreAttack"
+          >
+          </cats-ui-single-select>
+          <label>Service</label>
+          <cats-ui-single-select
+            [optionList]="serviceOptions"
+            [singleSelectConfig]="singleConfig"
+            (onSelection)="onSelection($event)"
+            formControlName="service"
+          >
+          </cats-ui-single-select>
+        </div>
+        <div style="width: 48%">
+          <label>Severity</label>
+          <cats-ui-single-select
+            [optionList]="severityOptions"
+            [singleSelectConfig]="singleConfig"
+            (onSelection)="onSelection($event)"
+            formControlName="severity"
+          >
+          </cats-ui-single-select>
+          <label>Associate Category</label>
+          <cats-ui-multi-select
+            formControlName="multiselect"
+            [optionList]="associateCategoryOptions"
+            [multiSelectConfig]="multiSelectConfig"
+            (onSelection)="onSelection($event)"
+            formControlName="associateCategory"
+          ></cats-ui-multi-select>
+          <label>Event Type</label>
+          <cats-ui-multi-select
+            formControlName="multiselect"
+            [optionList]="eventTypeOptions"
+            [multiSelectConfig]="multiSelectConfig"
+            (onSelection)="onSelection($event)"
+            formControlName="eventType"
+          ></cats-ui-multi-select>
+          <label>Alert Wait time</label>
+
+          <cats-ui-date-time-picker
+            class="calender"
+            #picker
+            (dateTimeSelected)="onDatetimeSelected($event)"
+            [dateConfig]="{ selectionMode: 'single' }"
+            formControlName="alertWaitTime"
+          ></cats-ui-date-time-picker>
+          <!-- [dateConfig]="dateTimeRangeConfig"
+            [preSelectedValue]="selectDate"
+            [maxDate]="maxDate" -->
+          <label>Occurance</label>
+          <cats-ui-input [inputConfig]="inputConfig" formControlName="occurance"> </cats-ui-input>
+          <label>Sub Service</label>
+          <cats-ui-single-select
+            [optionList]="subServiceOptions"
+            [singleSelectConfig]="singleConfig"
+            (onSelection)="onSelection($event)"
+            formControlName="subService"
+          >
+          </cats-ui-single-select>
+        </div>
+      </div>
+      <div>
+        <label>Alert Description</label>
+        <cats-ui-input [inputConfig]="inputConfig" formControlName="alertDescription">
+        </cats-ui-input>
+      </div>
+    </form>
+    <button (click)="onSubmit()">Submit</button>
+  </div>
+</div>
