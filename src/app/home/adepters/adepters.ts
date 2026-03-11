@@ -1,5 +1,5 @@
 import { Component, computed, signal, Signal } from '@angular/core';
-import { CatsDataGridComponent } from 'cats-data-grid';
+import { CatsDataGridComponent, CommonRendererComponent } from 'cats-data-grid';
 import { Router } from '@angular/router';
 import { homeSer } from '../homeSer';
 import { SnackbarService } from '../../snack-bar-comp/snackBarService';
@@ -58,7 +58,28 @@ export class Adepters {
       fieldName: 'email',
       headerName: 'Email'
     },
+    // action column
+    {
+      fieldName: 'actions',   // field can be anything
+      headerName: 'Actions',
+      width: 200,
+      isAction: true,
+      cellRenderer: CommonRendererComponent,
+      cellRendererParams: {
+        type: 'action-menu',
+        subType: 'horizontal',
+        value: true,
+        
+        actions: [
+          { label: 'Edit', eventName: 'edit' },
+          { label: 'Delete', eventName: 'delete' }
+        ],
+        onAction: (event: any) => {
+          this.onDelete(event)
+        }
+      }
 
+    }
   ]
 
 
@@ -85,23 +106,32 @@ export class Adepters {
     this.rowData = rows;
   }
 
-  onDelete() {
-    console.log('delete');
-    if (this.rowData.length > 0) {
-      const deletedIds = this.rowData.map((row) => row.id);
-      this.searchService.deleteStudents(deletedIds);
-      this.snackBar.open({ toastData: 'Selected rows deleted successfully', type: 'success' });
-    } else {
-      this.snackBar.open({ toastData: 'No rows selected for deletion', type: 'error' });
+  onDelete(event: any) {
+    // console.log(event.action);
+    const data = event.action;
+      // console.log(data.eventName );
+    if (data.eventName === 'delete') {
+      if (this.rowData.length > 0) {
+        const deletedIds = this.rowData.map((row) => row.id);
+        this.searchService.deleteStudents(deletedIds);
+        this.snackBar.open({ toastData: 'Selected rows deleted successfully', type: 'success' });
+      } else {
+        this.snackBar.open({ toastData: 'No rows selected for deletion', type: 'error' });
+      }
     }
-  }
-
-  onUpdate() {
-    if (this.rowData && this.rowData.length > 0) {
+    if (data.eventName === 'edit') {
+      if (this.rowData && this.rowData.length > 0) {
       this.currentStudent = this.rowData[0];
       this.showForm.set(true);
     }
-  }
+  }}
+
+  // onUpdate() {
+  //   if (this.rowData && this.rowData.length > 0) {
+  //     this.currentStudent = this.rowData[0];
+  //     this.showForm.set(true);
+  //   }
+  // }
 
   viewDetails() {
     if (this.rowData && this.rowData.length > 0) {

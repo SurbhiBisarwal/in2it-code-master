@@ -2,14 +2,14 @@
   <div style="display: flex; justify-content: space-between;">
     <img src="addBox.svg" alt="add" style="background-color: black" (click)="onclick()" />
     <div style="display: flex;margin-right: 10%;">
-      <img src="editDetail.svg" alt="delete" style="margin-right: 10%;" (click)="onUpdate()" />
+      <!-- <img src="editDetail.svg" alt="delete" style="margin-right: 10%;" (click)="onUpdate()" /> -->
       <img src="view.svg" alt="delete" style="margin-right: 10%;" (click)="viewDetails()" />
-      <img src="delete.svg" alt="delete"  (click)="onDelete()" />
+      <!-- <img src="delete.svg" alt="delete"  (click)="onDelete()" /> -->
     </div>
 
   </div>
-  <cats-data-grid [rowData]="filteredRows()" [colDefs]="coldef" checkboxSelectionType="multiple"
-    [checkBoxSelection]="true" (onCheckboxSelection)="onSelectedRows($event)"></cats-data-grid>
+  <cats-data-grid [rowData]="filteredRows()" [colDefs]="coldef" checkboxSelectionType="multiple"  [threeDotsMenuRequired]="true"
+    [checkBoxSelection]="true" (onCheckboxSelection)="onSelectedRows($event)" ></cats-data-grid>
 
 </div>
 

@@ -15,11 +15,6 @@ export interface SnackBarData {
   timestamp: number;
   toastData: string;
   buttonText: ('close' | 'undo' | 'retry' | 'view'|'home')[];
-  //  router?: any[];   // multiple routes
-  // navigationExtras?: {
-  //   state?: any;
-  //   [key: string]: any;
-  // };
   router?: {
     [key: string]: any[];   // button name → route
   };
@@ -63,7 +58,7 @@ export class SnackbarService {
 
   setTimeout(() => {
     this.removeToastItem(item.timestamp);
-  }, 10000);
+  }, 3000);  
 }
   // =================================================================================================
   // the list of active toasts 
