@@ -16,6 +16,7 @@ export class Adepters {
   students!: Signal<any[]>;
   showForm = signal(false);
   currentStudent: any = null;
+  rowdata: any[] = [];
 
   ngOnInit() {
     const deletedId = history.state.deletedId;
@@ -62,20 +63,23 @@ export class Adepters {
     {
       fieldName: 'actions',   // field can be anything
       headerName: 'Actions',
-      width: 200,
-      isAction: true,
+      // width: 200,
+      // isAction: true,
       cellRenderer: CommonRendererComponent,
       cellRendererParams: {
         type: 'action-menu',
         subType: 'horizontal',
         value: true,
-        
+
         actions: [
           { label: 'Edit', eventName: 'edit' },
-          { label: 'Delete', eventName: 'delete' }
+          { label: 'Delete', eventName: 'delete' },
+          { label: 'View Details', eventName: 'view' }
         ],
         onAction: (event: any) => {
-          this.onDelete(event)
+          // console.log(event);
+
+          this.onMenu(event)
         }
       }
 
@@ -105,46 +109,46 @@ export class Adepters {
     console.log(rows);
     this.rowData = rows;
   }
-
-  onDelete(event: any) {
-    // console.log(event.action);
+  onFormClosed() {
+    this.showForm.set(false);
+  }
+  
+  onMenu(event: any) {
     const data = event.action;
-      // console.log(data.eventName );
+    const incoming = event.row;
+    this.rowData = Array.isArray(incoming) ? incoming : [incoming];
+
+    // console.log('menu event', event);
+    // console.log('normalized rowData', this.rowData);
+    // console.log(data.eventName);
+
     if (data.eventName === 'delete') {
       if (this.rowData.length > 0) {
-        const deletedIds = this.rowData.map((row) => row.id);
+        const deletedIds = this.rowData.map((row: any) => row.id);
+        console.log(deletedIds);
+
         this.searchService.deleteStudents(deletedIds);
         this.snackBar.open({ toastData: 'Selected rows deleted successfully', type: 'success' });
       } else {
         this.snackBar.open({ toastData: 'No rows selected for deletion', type: 'error' });
       }
     }
-    if (data.eventName === 'edit') {
+    else if (data.eventName === 'edit') {
       if (this.rowData && this.rowData.length > 0) {
-      this.currentStudent = this.rowData[0];
-      this.showForm.set(true);
+        this.currentStudent = this.rowData[0];
+        this.showForm.set(true);
+      }
     }
-  }}
-
-  // onUpdate() {
-  //   if (this.rowData && this.rowData.length > 0) {
-  //     this.currentStudent = this.rowData[0];
-  //     this.showForm.set(true);
-  //   }
-  // }
-
-  viewDetails() {
-    if (this.rowData && this.rowData.length > 0) {
-      const name = this.rowData[0].name.replace(/\s+/g, ''); // removes ALL spaces
-      this.router.navigate(['/adapter', name], {
-        state: { student: this.rowData[0] }
-      });
+    else if (data.eventName === 'view') {
+      if (this.rowData && this.rowData.length > 0) {
+        const name = this.rowData[0].name.replace(/\s+/g, ''); // removes ALL spaces
+        this.router.navigate(['/adapter', name], {
+          state: { student: this.rowData[0] }
+        });
+      }
     }
   }
 
 
-  onFormClosed() {
-    this.showForm.set(false);
-  }
 }
 
